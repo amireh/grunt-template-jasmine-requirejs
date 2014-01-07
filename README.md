@@ -31,6 +31,26 @@ This object is `JSON.stringify()`-ed ( **support serialize Function object** ) i
 
 If `requireConfigFile` is specified then it will be loaded first and the settings specified by this directive will be deep-merged onto those.
 
+### templateOptions.deferHelpers
+Type: `Boolean [default=false]`
+
+Indicate that helper scripts should be loaded _after_ require.js has been
+configured. This may be necessary to work around issues that come up when
+you try to `require([ 'some_script' ])` a script inside one of the helpers,
+using either a pre-defined module name, or a full path, and then you get
+errors similar to:
+
+`Error: scripterror: Illegal path or script error: ['some_script']`
+
+Setting `deferHelpers` to true will make sure that the helpers will be
+loaded only after require.js has been configured with your custom paths
+and shims.
+
+### templateOptions.defaultErrors:
+Type: `Boolean [default=false]`
+
+Set to true if you don't want the script to install a custom `require.onError`
+error handler.
 
 ## Sample usage
 

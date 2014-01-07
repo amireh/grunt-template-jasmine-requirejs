@@ -31,7 +31,9 @@ module.exports = function(grunt) {
           return 'this is inline module';
         });
       }
-    }
+    },
+    deferHelpers: false,
+    defaultErrors: false
   };
 
   // Project configuration.

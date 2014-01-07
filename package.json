@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cloudchen/grunt-template-jasmine-requirejs"
+    "url": "https://github.com/amireh/grunt-template-jasmine-requirejs"
   },
   "keywords": [
     "grunt",
@@ -19,7 +19,8 @@
   ],
   "author": "Jarrod Overson",
   "contributors": [
-      { "name": "Cloud Chen", "email": "cloudcmh@gmail.com", "url": "https://github.com/cloudchen" }
+      { "name": "Cloud Chen", "email": "cloudcmh@gmail.com", "url": "https://github.com/cloudchen" },
+      { "name": "Ahmad Amireh", "email": "ahmad@amireh.net", "url": "https://github.com/amireh" }
   ],
   "license": "BSD",
   "devDependencies": {
