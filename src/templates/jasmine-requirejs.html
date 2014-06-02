@@ -9,6 +9,7 @@
   <% }) %>
 
   <script src="<%= temp %>/require.js"></script>
+  <% if (!options.defaultErrors) { %>
   <script>
     require.onError = function(error) {
       var message = error.requireType + ': ';
@@ -21,9 +22,10 @@
       throw Error(message);
     };
   </script>
+  <% } %>
 
   <% with (scripts) { %>
-  <% [].concat(jasmine, boot, vendor, helpers).forEach(function(script){ %>
+  <% [].concat(jasmine, boot, vendor, options.deferHelpers ? [] : helpers).forEach(function(script){ %>
   <script src="<%= script %>"></script>
   <% }) %>
   <% }; %>
@@ -62,6 +64,12 @@
       require.config(<%= serializeRequireConfig(options.requireConfig) %>);
     <% } %>
   </script>
+
+  <% if (options.deferHelpers) { %>
+    <% (scripts.helpers || []).forEach(function(script){ %>
+      <script src="<%= script %>"></script>
+    <% }) %>
+  <% }; %>
 
   <script>
     // Delay onLoad function until we are ready
