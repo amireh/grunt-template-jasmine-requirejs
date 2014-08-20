@@ -37,7 +37,7 @@ This object is `JSON.stringify()`-ed ( **support serialize Function object** ) i
 
 If `requireConfigFile` is specified then it will be loaded first and the settings specified by this directive will be deep-merged onto those.
 
-### templateOptions.deferHelpers
+### templateOptions.deferHelpers _(since v0.1.9)_
 Type: `Boolean [default=false]`
 
 Indicate that helper scripts should be loaded _after_ require.js has been
@@ -52,11 +52,16 @@ Setting `deferHelpers` to true will make sure that the helpers will be
 loaded only after require.js has been configured with your custom paths
 and shims.
 
-### templateOptions.defaultErrors:
+### templateOptions.defaultErrors _(since v0.1.9)_
 Type: `Boolean [default=false]`
 
 Set to true if you don't want the script to install a custom `require.onError`
 error handler.
+
+### templateOptions.skipSources _(since v0.2.1)_
+Type: `Boolean [default=false]`
+
+Set to true if you don't want the template to eagerly load all sources you specify in `options.src`. This assumes your test scripts will require the sources they need manually at run-time (e.g, using `require()`.)
 
 ## Sample usage
 
