@@ -26,7 +26,7 @@
   <% } %>
 
   <% with (scripts) { %>
-  <% [].concat(jasmine, vendor, options.deferHelpers ? [] : helpers).forEach(function(script){ %>
+  <% [].concat(jasmine, boot, vendor, options.deferHelpers ? [] : helpers).forEach(function(script){ %>
   <script src="<%= script %>"></script>
   <% }) %>
   <% }; %>
@@ -73,22 +73,24 @@
   <% }; %>
 
   <script>
+    // Delay onLoad function until we are ready
+    var startTests = window.onload;
+    window.onload = null;
+
     function launchTest() {
-    require([
-      <% scripts.src.forEach(function(script, i){ %>
-        <% script = script.replace(/\\/g, '/') // replace all backward slashes to forward slash %>
-        '<%= script %>' <%= i < scripts.src.length-1 ? ',' : '' %>
-      <% }) %>
-    ],
-    function(){
-      require(['<%= [].concat(scripts.specs,scripts.reporters).join("','") %>'], function(){
-        require(['<%= scripts.start.join("','") %>'], function(){
-          // good to go! Our tests should already be running.
-        })
-      })
+      require([
+        <% if (!options.skipSources) { %>
+          <% scripts.src.forEach(function(script, i){ %>
+            <% script = script.replace(/\\/g, '/') // replace all backward slashes to forward slash %>
+            '<%= script %>' <%= i < scripts.src.length-1 ? ',' : '' %>
+          <% }) %>
+        <% } %>
+      ], function() {
+        require(['<%= [].concat(scripts.specs,scripts.reporters).join("','") %>'], function(){
+          startTests();
+        });
+      });
     }
-    )
-  }
   </script>
 
   <% if (!hasCallback) { %>
